@@ -5,11 +5,13 @@ import com.google.gson.annotations.SerializedName
 import java.util.*
 
 data class News(
+    @SerializedName("nid") @Expose var id: Int? = null,
     @SerializedName("type") @Expose var type: String? = null,
-    @SerializedName("title") @Expose var title: String,
-    @SerializedName("content") @Expose var content: String,
     @SerializedName("date") @Expose var date: Date,
-    @SerializedName("picture") @Expose var picture: String
+    @SerializedName("title") @Expose var title: String,
+    @SerializedName("picture") @Expose var picture: String,
+    @SerializedName("content") @Expose var content: String,
+    @SerializedName("dateformated") @Expose var dateFormated: String,
 )
 
 data class NewsContainer(
