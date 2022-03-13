@@ -36,7 +36,7 @@ android {
 }
 
 dependencies {
-    implementation "androidx.activity:activity-ktx:$rootProject.activityVersion"
+
 
     //Retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
@@ -62,6 +62,13 @@ dependencies {
 
     //ViewModel
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+
+    //Glide
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    kapt 'com.github.bumptech.glide:compiler:4.11.0'
+
+    //Généralités
+    implementation "androidx.activity:activity-ktx:$rootProject.activityVersion"
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.4.1'
     implementation 'com.google.android.material:material:1.5.0'
