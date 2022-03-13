@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import fr.airweb.news.R
-import fr.airweb.news.model.NewsRoomContainer
+import fr.airweb.news.model.NewsContainer
 import fr.airweb.news.viewmodel.RetrofitService
 import retrofit2.*
 import retrofit2.converter.moshi.MoshiConverterFactory
@@ -27,20 +27,18 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        //Retrofit Webservice Call to populate Local Room Database, only if connected to Internet
-        newsRequest.enqueue(object : Callback<NewsRoomContainer> {
-            override fun onResponse(call: Call<NewsRoomContainer>, response: Response<NewsRoomContainer>) {
-                val allNews = response.body()
-                Log.v("Rep",response.code().toString())
-                Log.v("TOTU",allNews.toString())
-                Log.v("TOTU", allNews?.news?.get(1)?.title.toString())
-                //for (c in allCountry!!)
-                //    Log.v(
-                //        MainActivity::class.simpleName,
-                //        "NAME: ${c.content} \n CAPITAL: ${c.title} \n Language: ${c.dateFormated} "
-                //    )
+
+        newsRequest.enqueue(object : Callback<NewsContainer> {
+            //Retrofit Webservice Call to populate Local Room Database, only if connected to Internet
+            override fun onResponse(call: Call<NewsContainer>, response: Response<NewsContainer>) {
+                val body = response.body()
+                val allNews = body?.news
+                for (c in allNews?.indices!!){
+                    Log.v(allNews[c].title,allNews[c].content!!)
+                }
             }
-            override fun onFailure(call: Call<NewsRoomContainer>, t: Throwable) {
+            //if there is no Internet Access, the call will fail and we will use this
+            override fun onFailure(call: Call<NewsContainer>, t: Throwable) {
                 Log.i(MainActivity::class.simpleName, "on FAILURE!!!!")
             }
     })

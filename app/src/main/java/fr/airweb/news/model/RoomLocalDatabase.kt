@@ -1,28 +1,35 @@
 package fr.airweb.news.model
 
 import androidx.room.*
+import kotlinx.coroutines.flow.Flow
 
-class RoomLocalDatabase {
-
-    @Dao
+@Dao
     interface NewsDao{
-        @Query("SELECT * FROM news_table")
-        fun getAllNews() : List<NewsRoom>
+        @Query("SELECT * FROM news_table ORDER BY title ASC")
+        fun getAllNews() : Flow<List<News>>
 
         @Insert(onConflict = OnConflictStrategy.IGNORE)
-        fun insert(news : NewsRoom) : Long
+        suspend fun insert(news : News) : Long
 
         @Query("DELETE FROM news_table")
-        fun deleteAllNews() : Int
-    }
+        suspend fun deleteAllNews()
 
-    @Database(entities = [NewsRoom::class], version = 1)
-    abstract class AppDatabase : RoomDatabase() {
-        abstract fun newsDao(): NewsDao
+        @Query("SELECT * FROM news_table WHERE type = 'hot'")
+        fun getHotNews() : Flow<List<News>>
+
+        @Query("SELECT * FROM news_table WHERE type = 'actualité'")
+        fun getActuNews() : Flow<List<News>>
+
+        @Query("SELECT * FROM news_table WHERE type = 'news'")
+        fun getNewsNews() : Flow<List<News>>
+
+
+
+
     }
 
     @Entity(tableName = "news_table")
-    class NewsRoom(
+    class News(
         @PrimaryKey @ColumnInfo(name = "nid") val id: Int,
         @ColumnInfo(name = "type") val type: String?,
         @ColumnInfo(name = "date") val date: String?,
@@ -31,8 +38,8 @@ class RoomLocalDatabase {
         @ColumnInfo(name = "content") val content: String?,
         @ColumnInfo(name = "dateformated") val dateFormated: String?
     )
-}
 
-data class NewsRoomContainer(
-    var news : List<RoomLocalDatabase.NewsRoom>? = null
+
+data class NewsContainer(
+    var news : List<News>? = null
 )
