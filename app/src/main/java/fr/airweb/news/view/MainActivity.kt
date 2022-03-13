@@ -4,8 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import fr.airweb.news.R
-import fr.airweb.news.model.News
-import fr.airweb.news.model.NewsContainer
+import fr.airweb.news.model.NewsRoomContainer
 import fr.airweb.news.viewmodel.RetrofitService
 import retrofit2.*
 import retrofit2.converter.moshi.MoshiConverterFactory
@@ -29,8 +28,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         //Retrofit Webservice Call to populate Local Room Database, only if connected to Internet
-        newsRequest.enqueue(object : Callback<NewsContainer> {
-            override fun onResponse(call: Call<NewsContainer>, response: Response<NewsContainer>) {
+        newsRequest.enqueue(object : Callback<NewsRoomContainer> {
+            override fun onResponse(call: Call<NewsRoomContainer>, response: Response<NewsRoomContainer>) {
                 val allNews = response.body()
                 Log.v("Rep",response.code().toString())
                 Log.v("TOTU",allNews.toString())
@@ -41,7 +40,7 @@ class MainActivity : AppCompatActivity() {
                 //        "NAME: ${c.content} \n CAPITAL: ${c.title} \n Language: ${c.dateFormated} "
                 //    )
             }
-            override fun onFailure(call: Call<NewsContainer>, t: Throwable) {
+            override fun onFailure(call: Call<NewsRoomContainer>, t: Throwable) {
                 Log.i(MainActivity::class.simpleName, "on FAILURE!!!!")
             }
     })
