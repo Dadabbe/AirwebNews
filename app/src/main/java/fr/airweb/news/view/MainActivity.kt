@@ -12,10 +12,10 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 
 class MainActivity : AppCompatActivity() {
 
+    //Retrofit Webservice Call Setup
     companion object {
         const val BASE_WEBSERVICE_URL = "https://airweb-demo.airweb.fr/psg/"
     }
-
     val retro = Retrofit.Builder()
         .baseUrl(BASE_WEBSERVICE_URL)
         .addConverterFactory(MoshiConverterFactory.create())
@@ -28,6 +28,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        //Retrofit Webservice Call to populate Local Room Database, only if connected to Internet
         newsRequest.enqueue(object : Callback<NewsContainer> {
             override fun onResponse(call: Call<NewsContainer>, response: Response<NewsContainer>) {
                 val allNews = response.body()
