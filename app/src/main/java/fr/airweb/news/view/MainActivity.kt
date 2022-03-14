@@ -68,12 +68,10 @@ class MainActivity : AppCompatActivity() {
         //recyclerView.layoutManager = LinearLayoutManager(this)
 
         //NewsViewModel
-
-        newsViewModel.allNews.observe(this, Observer{
-                news -> news.let { adapter.submitList(it) }
-        })
-
-        //Essai
+        //Observer Try
+        //newsViewModel.allNews.observe(this, Observer{
+        //        news -> news.let { adapter.submitList(it) }
+        //})
 
 
         newsRequest.enqueue(object : Callback<NewsContainer> {
@@ -81,7 +79,7 @@ class MainActivity : AppCompatActivity() {
             override fun onResponse(call: Call<NewsContainer>, response: Response<NewsContainer>) {
                 val body = response.body()
                 val allNews = body?.news
-                val newsDao : NewsDao
+                //val newsDao : NewsDao
                 for (c in allNews?.indices!!){
                     Log.v(allNews[c].title,allNews[c].content!!)
                     CoroutineScope(Dispatchers.IO).launch {

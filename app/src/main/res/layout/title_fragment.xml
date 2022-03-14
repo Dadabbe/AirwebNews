@@ -1,17 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="horizontal"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.2"
+        android:src="@drawable/logo_psg"
+        android:contentDescription="@string/psg"
+        />
 
     <TextView
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:text="@string/title_bar_title"
         android:layout_weight="0.9"
-        android:textSize="18sp"
+        android:textSize="30sp"
+        android:gravity="center"
         android:fontFamily="@font/roboto_regular"
+        android:theme="@style/Theme.AirwebNews"
     />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/contact_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="0.2"
+        android:contentDescription="@string/contact"
+        android:src="@drawable/ic_baseline_contact_24" />
 
 </LinearLayout>

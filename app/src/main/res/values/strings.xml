@@ -3,4 +3,13 @@
     <string name="article_picture_description">Article picture</string>
     <string name="contact">Contact Us</string>
     <string name="title_bar_title">PSG News</string>
+    <string name="airweb_title">Airweb - Facilitateur de mobilité</string>
+    <string name="psg">PSG</string>
+    <string name="address_title">Adresse</string>
+    <string name="address">1 Rue Royale, Bureaux de Colline, 92210 Saint Cloud</string>
+    <string name="mail_title">Mail</string>
+    <string name="mail">contact@airweb.fr</string>
+    <string name="phone_title">Téléphone</string>
+    <string name="phone">+33 1 76 61 65 10</string>
+    <string name="wip">WORK IN PROGRESS</string>
 </resources>

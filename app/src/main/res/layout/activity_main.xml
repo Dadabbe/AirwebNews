@@ -1,35 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <LinearLayout
+        android:id="@+id/mother_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
         <fragment
-            android:name="fr.airweb.news.view.TitleFragment"
-            android:id="@+id/titleFragment"
+            android:name="fr.airweb.news.view.MainFragment"
+            android:id="@+id/mainFragment"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.1" />
+            android:layout_height="match_parent"
+            />
 
-        <fragment
-            android:name="fr.airweb.news.view.ListFragment"
-            android:id="@+id/recycleFragment"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.9" />
-
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:src="@drawable/ic_baseline_contact_24"
-        android:contentDescription="@string/contact"/>
     </LinearLayout>
 </layout>
