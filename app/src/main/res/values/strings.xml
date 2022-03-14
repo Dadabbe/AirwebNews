@@ -2,4 +2,5 @@
     <string name="app_name">AirwebNews</string>
     <string name="article_picture_description">Article picture</string>
     <string name="contact">Contact Us</string>
+    <string name="title_bar_title">PSG News</string>
 </resources>

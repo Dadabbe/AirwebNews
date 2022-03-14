@@ -9,14 +9,20 @@ import android.os.Bundle
 import android.os.Environment
 import android.util.Log
 import android.widget.Toast
+import androidx.activity.viewModels
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.annotation.GlideModule
 import com.bumptech.glide.module.AppGlideModule
 import fr.airweb.news.R
+import fr.airweb.news.model.NewsApplication
 import fr.airweb.news.model.NewsContainer
+import fr.airweb.news.model.NewsDao
 import fr.airweb.news.viewmodel.NewsListAdapter
+import fr.airweb.news.viewmodel.NewsViewModel
+import fr.airweb.news.viewmodel.NewsViewModelFactory
 import fr.airweb.news.viewmodel.RetrofitService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -38,7 +44,10 @@ class MainActivity : AppCompatActivity() {
         const val BASE_WEBSERVICE_URL = "https://airweb-demo.airweb.fr/psg/"
     }
 
-
+    private val newNewsActivityRequestCode = 1
+    private val newsViewModel : NewsViewModel by viewModels {
+        NewsViewModelFactory((application as NewsApplication).repository)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,16 +62,26 @@ class MainActivity : AppCompatActivity() {
         val newsRequest = service.getAllNews()
 
         //RecyclerView Setup
-        val recyclerView = findViewById<RecyclerView>(R.id.recyclerview)
+        //val recyclerView = findViewById<RecyclerView>(R.id.recyclerview)
         val adapter = NewsListAdapter()
-        recyclerView.adapter = adapter
-        recyclerView.layoutManager = LinearLayoutManager(this)
+        //recyclerView.adapter = adapter
+        //recyclerView.layoutManager = LinearLayoutManager(this)
+
+        //NewsViewModel
+
+        newsViewModel.allNews.observe(this, Observer{
+                news -> news.let { adapter.submitList(it) }
+        })
+
+        //Essai
+
 
         newsRequest.enqueue(object : Callback<NewsContainer> {
             //Retrofit Webservice Call to populate Local Room Database, only if connected to Internet
             override fun onResponse(call: Call<NewsContainer>, response: Response<NewsContainer>) {
                 val body = response.body()
                 val allNews = body?.news
+                val newsDao : NewsDao
                 for (c in allNews?.indices!!){
                     Log.v(allNews[c].title,allNews[c].content!!)
                     CoroutineScope(Dispatchers.IO).launch {
@@ -77,6 +96,7 @@ class MainActivity : AppCompatActivity() {
                             c,
                             applicationContext)
                     }
+                    newsViewModel.insert(allNews[c])
                 }
                 Toast.makeText(applicationContext,"Connecté à Internet",Toast.LENGTH_SHORT).show()
             }

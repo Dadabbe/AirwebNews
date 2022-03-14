@@ -5,7 +5,7 @@ import fr.airweb.news.model.News
 import fr.airweb.news.model.NewsRepository
 import kotlinx.coroutines.launch
 
-class NewsViewModel {
+
     class NewsViewModel(private val repository: NewsRepository) : ViewModel() {
 
         // Using LiveData and caching what allNewss returns has several benefits:
@@ -32,4 +32,3 @@ class NewsViewModel {
         }
     }
 
-}
