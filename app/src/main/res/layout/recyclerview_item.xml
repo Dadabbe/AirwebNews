@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="50dp">
+
+    <TextView
+        android:id="@+id/article_textView"
+        style="@style/news"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/holo_orange_light"
+        android:text="Aha"/>
+
+    <ImageView
+        android:id="@+id/article_imageView"
+        android:layout_width="45dp"
+        android:layout_height="34dp"
+        android:layout_gravity="center_vertical"
+        android:contentDescription="@string/article_picture_description" />
+
+</LinearLayout>
